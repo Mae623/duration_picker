@@ -226,6 +226,20 @@ class _Dial extends StatefulWidget {
 }
 
 class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
+  late Tween<double> _thetaTween;
+  late Animation<double> _theta;
+  late AnimationController _thetaController;
+  bool _dragging = false;
+  late ThemeData themeData;
+  MaterialLocalizations? localizations;
+  MediaQueryData? media;
+
+  /// 新的
+  final double _pct = 0.0;
+  int _secondaryUnitValue = 0;
+  int _baseUnitValue = 0;
+  double _turningAngle = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -252,10 +266,6 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
     _baseUnitValue = _baseUnitHand();
   }
 
-  late ThemeData themeData;
-  MaterialLocalizations? localizations;
-  MediaQueryData? media;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -270,16 +280,6 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
     _thetaController.dispose();
     super.dispose();
   }
-
-  late Tween<double> _thetaTween;
-  late Animation<double> _theta;
-  late AnimationController _thetaController;
-
-  final double _pct = 0.0;
-  int _secondaryUnitValue = 0;
-  bool _dragging = false;
-  int _baseUnitValue = 0;
-  double _turningAngle = 0.0;
 
   static double _nearest(double target, double a, double b) {
     return ((target - a).abs() < (target - b).abs()) ? a : b;
